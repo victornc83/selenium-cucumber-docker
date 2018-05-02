@@ -18,16 +18,16 @@ docker_ip = %x(/sbin/ip route|awk '/default/ { print $3 }').strip
 #Hint! Running from inside a Vagrant VM?
 #the host IP will be "10.0.2.2"
 
-Capybara.register_driver :remote_chrome do |app|
+Capybara.register_driver :remote_firefox do |app|
   Capybara::Selenium::Driver.new(app,
   :browser => :remote,
-  :desired_capabilities => :chrome,
+  :desired_capabilities => :firefox,
   :url => "http://#{docker_ip}:4444/wd/hub")
   #puts docker_ip
 end
 
 Capybara.configure do |config|
   config.run_server = false
-  config.default_driver = :remote_chrome
+  config.default_driver = :remote_firefox
   config.app_host = 'http://www.google.com' # change url
 end
